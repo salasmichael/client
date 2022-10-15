@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+          <label for="name">Nombre del empleado</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="endowment.nameUser"
+            name="name"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Correo eléctronico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="description"
+            required
+            [(ngModel)]="endowment.email"
+            name="description"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="serial">Articulo</label>
+            <select class="form-control"
+                    name="serial"
+                    id="serial"
+                    [(ngModel)]="endowment.serial"
+                    >
+                    <option *ngFor="let item of endowments"
+                     [value]="item.serial">{{ item.name }} - {{ item.type }}</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Fecha de entrega</label>
+            <input
+              type="date"
+              class="form-control"
+              id="date"
+              required
+              [(ngModel)]="endowment.date"
+              name="date"
+            />
+          </div>
+  
+        <button (click)="save()" class="btn btn-success">Guardar</button>
+      </div>
+    <div class="col-md-8 text-center">
+        <div class="spinner-border m-5" role="status"
+            *ngIf="!endowments">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+        <table class="table" *ngIf="endowments">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Serial</th>
+                <th scope="col">Nombre del artículo</th>
+                <th scope="col">Nombre del empleado</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha de asignación</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr 
+                *ngFor="let endowment of endowmentsData; let i = index" >
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ endowment.serial }}</td>
+                <td>{{ endowment.type }} {{ endowment.name }} </td>
+                <td>{{ endowment.username }}</td>
+                <td>{{ endowment.email }}</td>
+                <td>{{ endowment.dateAssignment }}</td>
+                <td>
+                    <button type="button"
+                    (click)="deleteAssig(endowment.id)" 
+                    title="eliminar" 
+                    class="btn btn-danger">X</button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+    </div>
+</div>
